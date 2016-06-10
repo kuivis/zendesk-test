@@ -1,0 +1,80 @@
+<html>
+<head>
+<!-- Start of ubiikki Zendesk Widget script -->
+<script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(c){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var o=this.createElement("script");n&&(this.domain=n),o.id="js-iframe-async",o.src=e,this.t=+new Date,this.zendeskHost=t,this.zEQueue=a,this.body.appendChild(o)},o.write('<body onload="document._l();">'),o.close()}("https://assets.zendesk.com/embeddable_framework/main.js","ubiikki.zendesk.com");
+/*]]>*/</script>
+<!-- End of ubiikki Zendesk Widget script -->
+<link rel="stylesheet" href="form_styles.css">
+</head>
+<body>
+<h1>trololoo</h1>
+
+
+	   
+<div id="ticket_form">
+<div class="title">Submit a ticket</div>
+<form method="post">
+<ul>
+  <li><input type="text" placeholder="ticket subject" 
+    name="subject" class="field" required></li>
+
+  <li><textarea placeholder="what's the problem?" 
+    name="description" rows="6" class="field" required></textarea></li>
+	
+<li><input type="email" placeholder="your email address" name="email" class="field" required>
+<div class="register"><a href="https://ubiikki.zendesk.com/auth/v2/login/registration" target="_blank">
+Register</a> so our support team can email you to solve your problem.</div>
+</li>
+
+  <li><input type="submit" value="Submit"></li> 
+</ul>
+</form>
+</div>
+<div id="paluusyote"></div>
+
+<script>
+var xmlhttp = new XMLHttpRequest();
+var url = "https://ubiikki.zendesk.com/api/v2/tickets.json";
+var message = '{'+
+  '"ticket": {' +
+    '"subject":   "Testi65",' +
+    '"comment":   { "body": "Tämäkin on testiviesti itsessänsä" },'+
+    '"requester": { "locale_id": 84, "name": "Teemu Testaaja", "email": "testi@example.org" },'+
+    '"custom_fields": ['+
+      '{'+
+        '"id":    24853089,'+
+        '"value": "https://ubilabs-dev.ubilabs.fi/html/kokoa-demo/"'+
+      '},'+
+      '{'+
+        '"id":    24853099,'+
+        '"value": "Chrome joku"'+
+      '}'+
+    ']'+
+  '}'+
+'}';
+
+
+
+xmlhttp.onreadystatechange = function() {
+    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        myFunction(JSON.parse(xmlhttp.responseText));
+    }
+};
+xmlhttp.open("POST", url, true);
+xmlhttp.setRequestHeader("Content-type", "application/json");
+xmlhttp.setRequestHeader("Authorization", 'Basic ' + btoa('zendesk@ubiikki.fi/token:RHUa0n0go6onB2Ow0lzef9KWYPEhYzeOuFVSMPti'));
+xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "https://dl.dropboxusercontent.com");
+// xmlhttp.send(message);
+
+
+function myFunction(arr) {
+    var out = arr;
+    // jotain käsittelyä tähän ehkäpäs
+    document.getElementById("paluusyote").innerHTML = out;
+}
+</script>
+</body>
+</html>
+
+
+
